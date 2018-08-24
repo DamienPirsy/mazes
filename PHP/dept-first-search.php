@@ -21,9 +21,11 @@ class Maze
         $this->horWalls = []; // list of removed horizontal walls (---+)        
         $this->vertWalls = [];// list of removed vertical walls (|)        
         $this->isDebug = $debug; // debug flag
+        
+        $this->generate();
     }
 
-    public function generate()
+    protected function generate()
     {        
         $this->initMaze(); // init the stack and an unvisited grid
         // start from a random cell and then proceed recursively
@@ -64,7 +66,7 @@ class Maze
     /**
     * Logs to stdOut if debug flag is enabled
     */
-    private function log(...$params)
+    protected function log(...$params)
     {
         if ($this->isDebug) {
             echo vsprintf(array_shift($params), $params).PHP_EOL;
@@ -72,7 +74,7 @@ class Maze
     }
 
 
-    public function walk($x, $y)
+    private function walk($x, $y)
     {
         $this->log('Entering cell %d,%d', $x, $y);
         // mark current cell as visited     
@@ -146,5 +148,4 @@ class Maze
 }
 
 $maze = new Maze(10,10);
-$maze->generate();
 $maze->printOut();
