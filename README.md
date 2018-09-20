@@ -7,16 +7,14 @@ A simple collection of Maze generation algorithms I'm doing in my free time, so 
 Just clone the repo, set inside each file the width and height of the maze you want to generate and call the file in your console.
 
 ```php
-$maze = new Binary(6, 6, true);
+$maze = new Binary(6, 6);
 $maze->generate()->printOut();
 ```
 
 ```
 $ cd  mazes/PHP
 $ php binary.php
-```
 
-```
 +   +---+---+---+---+---+
 |       |   |   |       |
 +---+   +   +   +---+   +
