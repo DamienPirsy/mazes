@@ -34,6 +34,13 @@ $ php binary.php
 
 If you like to contribute in any way (be it a comment or a pull request) feel free to do so.
 
+## How to
+
+Done so far:
+
+* Binary
+* Depth First Search
+
 ## License
 
 This project is licensed under the MIT License
