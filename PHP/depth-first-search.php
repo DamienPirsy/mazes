@@ -1,35 +1,36 @@
 <?php
 
-class Maze 
+require_once('./maze.php');
+
+class DFS extends Maze
 {
-    private $width;
-    private $heigth;
     private $grid;
     private $path;
     private $horWalls;
     private $vertWalls;
-    private $dirs;
-    private $isDebug;
+    private $directions;
 
-
-    public function __construct($x, $y, $debug = false)
+    /**
+    *  @inheritDocs
+    */
+    public function __construct($width, $height, $debug = false)
     {
-        $this->width = $x;
-        $this->height = $y;
+        parent::__construct($width, $height, $debug);
         $this->path = [];        
-        $this->dirs = [ [0, -1], [0, 1], [-1, 0], [1, 0]]; // array of coordinates of N,S,W,E
+        $this->directions = [ [0, 1], [0, -1], [-1, 0], [1, 0]]; // array of coordinates of N,S,W,E
         $this->horWalls = []; // list of removed horizontal walls (---+)        
-        $this->vertWalls = [];// list of removed vertical walls (|)        
-        $this->isDebug = $debug; // debug flag
-        
-        $this->generate();
+        $this->vertWalls = [];// list of removed vertical walls (|)
     }
 
-    protected function generate()
+    /**
+    *  @inheritDocs
+    */
+    public function generate()
     {        
         $this->initMaze(); // init the stack and an unvisited grid
         // start from a random cell and then proceed recursively
         $this->walk(mt_rand(0, $this->width-1), mt_rand(0, $this->height-1));
+        return $this;
     }
 
     /**
@@ -63,22 +64,11 @@ class Maze
         echo $str;
     }
 
-    /**
-    * Logs to stdOut if debug flag is enabled
-    */
-    protected function log(...$params)
-    {
-        if ($this->isDebug) {
-            echo vsprintf(array_shift($params), $params).PHP_EOL;
-        }
-    }
-
-
-    private function walk($x, $y)
+    protected function walk($x, $y)
     {
         $this->log('Entering cell %d,%d', $x, $y);
         // mark current cell as visited     
-        $this->grid[$x][$y] = true; 
+        $this->grid[$x][$y] = true;
         // add cell to path
         $this->path[] = [$x, $y];
         // get list of all neighbors
@@ -135,7 +125,7 @@ class Maze
     private function getNeighbors($x, $y) 
     {       
         $neighbors = [];
-        foreach ($this->dirs as $dir) {
+        foreach ($this->directions as $dir) {
             $nextX = $dir[0] + $x;
             $nextY = $dir[1] + $y;
             if (($nextX >= 0 && $nextX < $this->width && $nextY >= 0 && $nextY < $this->height) && !$this->grid[$nextX][$nextY]) {
@@ -147,5 +137,5 @@ class Maze
 
 }
 
-$maze = new Maze(10,10);
-$maze->printOut();
+$maze = new DFS(10, 12);
+$maze->generate()->printOut();
