@@ -22,7 +22,7 @@ class Binary extends Maze
 	*/
 	public function generate()
 	{
-		$this->initMaze();
+		//$this->initMaze();
         for ($y=0; $y<$this->height; $y++) {
             for ($x=0; $x < $this->width; $x++) {
                 if ($x == $this->width-1 && $y == $this->height-1) {
@@ -72,19 +72,6 @@ class Binary extends Maze
         }
         echo $str;
     }
-
-	/**
-    * Initialzie an empty grid of $width * $height dimensions
-    */
-    private function initMaze()
-    {
-        for ($i=0;$i<$this->width;$i++) {
-            for ($j = 0;$j<$this->height;$j++) {
-                $this->grid[$i][$j] = null;
-            }
-        }
-    }
-
 }
 
 $maze = new Binary(6, 6);
