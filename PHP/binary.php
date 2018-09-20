@@ -14,10 +14,7 @@ class Binary extends Maze
 	{
 		parent::__construct($width, $height, $debug);
 		$this->grid = [];
-        $this->directions = [];
-        // map of coordinates of N,S,W,E
-        $this->dirs = [ 'N' => [0, 1], 'S' => [0, -1], 'W' => [-1, 0], 'E' => [1, 0]];
-        $this->setDirs('S', 'E');
+        $this->directions = [[0, -1], [1, 0]]; // S, E
 	}
 
 	/**
@@ -26,7 +23,6 @@ class Binary extends Maze
 	public function generate()
 	{
 		$this->initMaze();
-
         for ($y=0; $y<$this->height; $y++) {
             for ($x=0; $x < $this->width; $x++) {
                 if ($x == $this->width-1 && $y == $this->height-1) {
@@ -59,7 +55,6 @@ class Binary extends Maze
         $str = '+';
         for ($i=0;$i<$this->width;$i++) {
             $str .= ($northDoor == $i) ? '   +' : '---+';
-            //$str .= '---+';
         }
 
         $str .= PHP_EOL;
@@ -79,39 +74,18 @@ class Binary extends Maze
     }
 
 	/**
-	*  Sets initial maze directions
-	*  The method is public to allow customization and experimentation of bias
- 	*  @param string $dir1 (N, S, W, E)
- 	*  @param string $dir2 (N, S, W, E)
- 	*  @return null
-	*/
-	public function setDirs($dir1 = 'S', $dir2 = 'E')
-	{
-		$allowed = ['N', 'S', 'W', 'E'];
-		$dir1 = strtoupper($dir1);
-		$dir2 = strtoupper($dir2);
-		if (!in_array($dir1, $allowed) && !in_array($dir2, $allowed)) {
-			$this->setDirs('S', 'E');
-		} else {
-			array_push ($this->directions, $this->dirs[$dir1]);
-			array_push ($this->directions, $this->dirs[$dir2]);
-		}
-	}
-
-
-	/**
     * Initialzie an empty grid of $width * $height dimensions
     */
     private function initMaze()
     {
         for ($i=0;$i<$this->width;$i++) {
             for ($j = 0;$j<$this->height;$j++) {
-                $this->grid[$i][$j] = false;
+                $this->grid[$i][$j] = null;
             }
         }
     }
 
 }
 
-$maze = new Binary(6, 6, true);
+$maze = new Binary(6, 6);
 $maze->generate()->printOut();
