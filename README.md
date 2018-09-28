@@ -39,6 +39,7 @@ If you like to contribute in any way (be it a comment or a pull request) feel fr
 Done so far:
 
 * Binary
+* Sidewinder
 * Depth First Search
 
 ## License
