@@ -88,7 +88,6 @@ class Sidewinder extends Maze
 
 
 
-$maze = new Sidewinder(6, 6);
+$maze = new Sidewinder(12, 8);
 //$maze->setWeight(10);
-$maze->generate()
-	 ->printOut();
+$maze->generate()->printOut();
