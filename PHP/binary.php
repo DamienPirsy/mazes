@@ -6,6 +6,7 @@ require_once('./maze.php');
 class Binary extends Maze
 {
 	private $grid;
+    protected $name = 'Binary';
 
 	/**
 	*  @inheritDocs
@@ -22,7 +23,6 @@ class Binary extends Maze
 	*/
 	public function generate()
 	{
-		//$this->initMaze();
         for ($y=0; $y<$this->height; $y++) {
             for ($x=0; $x < $this->width; $x++) {
                 if ($x == $this->width-1 && $y == $this->height-1) {
@@ -74,5 +74,5 @@ class Binary extends Maze
     }
 }
 
-$maze = new Binary(6, 6);
+$maze = new Binary(12, 10);
 $maze->generate()->printOut();

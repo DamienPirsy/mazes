@@ -5,6 +5,7 @@ abstract class Maze {
 	protected $width;
 	protected $height;
     protected $isDebug;
+    protected $name;
 
     /**
     *  @param int $width
@@ -16,6 +17,7 @@ abstract class Maze {
 		$this->width = $width;
 		$this->height = $height;
         $this->isDebug = $debug; // debug flag
+        $this->log('Generating a %dx%d Maze using the %s algorithm', $this->width, $this->height, $this->name);
 	}
 
 	/**
